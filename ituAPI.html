@@ -9,15 +9,15 @@
 <body>
     <div>
         <p>Provinsi</p>
-        <select name="" id="Provinsi">
+        <select name="" id="Provinsi" onclick="loodProvinsi()">
             <option value="">--Pilih Provinsi--</option>
         </select>
     </div>
 
     <div>
         <p>Kabupaten/Kota</p>
-        <select name="" id="kabko">
-            <option value="">--Pilih kabko--</option>
+        <select name="" id="kabupaten/kota">
+            <option value="">--Pilih kabupaten/kota--</option>
         </select>
     </div>
 
@@ -30,8 +30,29 @@
 
     <div>
         <p>kelurahan</p>
-        <select name="" id="kecamatan">
+        <select name="" id="kelurahan">
             <option value="">--Pilih Kelurahan--</option>
         </select>
     </div>
+
+    <script>
+        function loodProvinsi() {
+            let xhr = new XMLHttpRequest();
+            xhr.open(
+                "GET",
+                'https://api.goapi.io/regional/provinsi?api_key=a8e63fef-c45d-57ad-3956-9bf70169'
+            );
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && xhr.status === 200) {
+                    let provinsi = JSON.porse(xhr.responseText);
+                    for(let i = 0; i < provinsi.length; i++) {
+                        console.log(provinsi(i));
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
 </body>
+</html>
