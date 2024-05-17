@@ -43,11 +43,15 @@
                 'https://api.goapi.io/regional/provinsi?api_key=a8e63fef-c45d-57ad-3956-9bf70169'
             );
 
-            xhr.onreadystatechange = function(){
-                if(xhr.readyState === 4 && xhr.status === 200) {
-                    let provinsi = JSON.porse(xhr.responseText);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    let provinsi = JSON.parse(xhr.responseText);
                     for(let i = 0; i < provinsi.length; i++) {
-                        console.log(provinsi(i));
+                        let provinsiSelect = document.getElementById("provinsi");
+                        let option = document.createElement("option");
+                        Option.value = provinsi(i).id;
+                        option.text = provinsi(i).name;
+                        provinsiSelect.add(option);
                     }
                 }
             };
