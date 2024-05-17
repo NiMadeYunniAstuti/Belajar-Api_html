@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>API Wilayah Indonesia</title>
@@ -9,7 +9,7 @@
 <body>
     <div>
         <p>Provinsi</p>
-        <select name="" id="Provinsi" onclick="loodProvinsi()">
+        <select name="" id="Provinsi"> onclick="loadProvinsi()">
             <option value="">--Pilih Provinsi--</option>
         </select>
     </div>
@@ -36,27 +36,27 @@
     </div>
 
     <script>
-        function loodProvinsi() {
+        function loadProvinsi() {
             let xhr = new XMLHttpRequest();
             xhr.open(
-                "GET",
+                "GET"
                 'https://api.goapi.io/regional/provinsi?api_key=a8e63fef-c45d-57ad-3956-9bf70169'
             );
 
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     let provinsi = JSON.parse(xhr.responseText);
-                    for(let i = 0; i < provinsi.length; i++) {
+                    for (let i = 0; i < provinsi.length; i++) {
                         let provinsiSelect = document.getElementById("provinsi");
-                        let option = document.createElement("option");
-                        Option.value = provinsi(i).id;
-                        option.text = provinsi(i).name;
-                        provinsiSelect.add(option);
+                        let option = document.createElementn("option");
+                        option.value = provinsi[i].id;
+                        option.text = provinsi [i].name;
+                        provinsiSelect.add(Option);
                     }
                 }
             };
             xhr.send();
         }
     </script>
-</body>
+  </body>
 </html>
