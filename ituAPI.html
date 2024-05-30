@@ -8,55 +8,79 @@
 </head>
 <body>
     <div>
-        <p>Provinsi</p>
-        <select name="" id="Provinsi"> onclick="loadProvinsi()">
-            <option value="">--Pilih Provinsi--</option>
+    <p>Provinsi</p>
+    <select id="provinsi" onchange="loadKabupatenKota()">
+        <option value="">--Pilih Provinsi--</option>
         </select>
     </div>
 
     <div>
-        <p>Kabupaten/Kota</p>
-        <select name="" id="kabupaten/kota">
-            <option value="">--Pilih kabupaten/kota--</option>
+        <p>Kabupaten/Kota</p> 
+        <select id="kabupatenKota" onchange="loadKecamatan()">
+            <option value="">--Pilih Kabupaten/kota--</option>
         </select>
     </div>
 
     <div>
         <p>Kecamatan</p>
-        <select name="" id="kecamatan">
+        <select id="kecamatan"> onchange="loadKelurahan()">
             <option value="">--Pilih Kecamatan--</option>
         </select>
     </div>
 
     <div>
-        <p>kelurahan</p>
-        <select name="" id="kelurahan">
+        <p>Kelurahan</p>
+        <select id="kelurahan">
             <option value="">--Pilih Kelurahan--</option>
         </select>
     </div>
 
-    <script>
-        function loadProvinsi() {
-            let xhr = new XMLHttpRequest();
-            xhr.open(
-                "GET"
-                'https://api.goapi.io/regional/provinsi?api_key=a8e63fef-c45d-57ad-3956-9bf70169'
-            );
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    let provinsi = JSON.parse(xhr.responseText);
-                    for (let i = 0; i < provinsi.length; i++) {
-                        let provinsiSelect = document.getElementById("provinsi");
-                        let option = document.createElementn("option");
-                        option.value = provinsi[i].id;
-                        option.text = provinsi [i].name;
-                        provinsiSelect.add(Option);
-                    }
-                }
-            };
-            xhr.send();
+        <script>
+    const apiUrl = 'https://api.goapi.io/regional/provinsi?api_key=a8e63fef-c45d-57ad-3956-9bf70169';
+        
+        function fetchCountries() {
+          fetch(apiUrl)
+            .then(response => response.json())
+            .then(bebas => {
+              const dropdown = document.getElementById('provinsi');
+              dropdown.innerHTML = '';
+        
+        
+              bebas.data.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.id;
+                option.text = country.name;
+                dropdown.add(option);
+              });
+            })
         }
-    </script>
-  </body>
-</html>
+        
+        fetchCountries();
+          </script>
+
+        <script>
+    const apiUrl = 'https://api.goapi.io/regional/kelurahan?api_key=a8e63fef-c45d-57ad-3956-9bf70169';
+        
+        function fetchCountries() {
+          fetch(apiUrl)
+            .then(response => response.json())
+            .then(bebas => {
+              const dropdown = document.getElementById('kabupatenKota');
+              dropdown.innerHTML = '';
+        
+        
+              bebas.data.forEach(country => {
+                const option = document.createElement('option');
+                option.value = country.id;
+                option.text = country.name;
+                dropdown.add(option);
+              });
+            })
+        }
+
+        fetchCountries();
+          </script>
+        </body>
+        </html>
+        
+    
